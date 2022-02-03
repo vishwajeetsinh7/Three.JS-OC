@@ -1,13 +1,13 @@
 ![THREE.s](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Three.js_Icon.svg/150px-Three.js_Icon.svg.png) 
 
 
-#  [Three.JS](https://threejs.org/) 
+#  **[Three.JS](https://threejs.org/)** 
 
 
 ___
 ---
 
-> 1) WHAT IS THREE.JS
+> **1) WHAT IS THREE.JS**
 
 ANS: Three.JS is  a 3D JavaScript library that enables developers to create 3D experiences for the web
 
@@ -106,9 +106,116 @@ scene.add(camera)
 
 
 
-Constructor
+### `Constructor`
 PerspectiveCamera( fov : Number, aspect : Number, near : Number, far : Number )
 
+1) (75) THE FIELD OF VIEW - 1st parameter  	
+* VERTICAL VISION ANGLE
+* IN DEGREE
+* ALSO CALLED FOV
 
-==highlight==
+2) THE ASPECT RATIO -2nd parameter
+- The width of the render divided by the height of the render we don’t have the render yet, but we can decide on size now
 
+```js
+// create this before camera for value
+const sizes = {
+    width: 800,
+    height: 600
+}
+
+```
+
+
+### ` RENDERER`
+* Render the scene from the camera point of view
+* Result drawn into canvas
+* A canvas is a HTML element in which you can draw stuff
+* Three.JS will use WebGL to draw the render inside this canvas
+* You can create it or you can let Three.JS do it
+
+USE
+```JS
+ const canvas = document.querySelector(‘.webgl’)
+```
+To retrieve the canvas we created in the HTML and store it in  a canvas variable. 
+Ex : <canvas class=”webgl”>          <canvas>
+
+* Use the setSize() method to update the size of the renderer
+```JS
+renderer.setSize(sizes.width, sizes.height)
+
+```
+
+### : : `: FIRST RENDER`
+
+Call the render(...) method on the renderer with scene and the camera as the parameter
+
+* Now nothing is visible because the camera is inside the cube we need move the camera backward
+
+**To transform an object, we can use the following properties**
+* Position
+* Rotation
+* scale
+
+: the position property is also an object with x, y, z properties Three.JS consider the forward/backward axis to be z
+
+
+**We need to move the camera backward before doing the render**
+```JS
+//camera 
+camera.position.z = 3
+```
+
+
+**At last we have to render both scene and camera**
+
+```JS
+camera.position.z = 3
+
+```
+
+
+---
+___
+---
+
+# **FULL CODE**
+
+```JS
+ 
+// 1) create a scene With captital S
+const scene = new THREE.Scene()
+ 
+// 2) // red cube
+ 
+const geometry = new THREE.BoxGeometry(1,1,1)
+const material = new THREE.MeshBasicMaterial({ color:0xff0000})
+const mesh = new THREE.Mesh(geometry, material)
+ 
+scene.add(mesh)
+ 
+ 
+const sizes = {
+    width: 800,
+    height: 600
+}
+ 
+// camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
+camera.position.z = 3
+scene.add(camera)
+ 
+ 
+// renderer
+const canvas = document.querySelector('.webgl')
+ 
+ 
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas
+})
+renderer.setSize(sizes.width, sizes.height)
+renderer.render(scene,camera)
+
+
+```
