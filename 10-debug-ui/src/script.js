@@ -5,7 +5,10 @@ import gsap from 'gsap'
 // how to import dat.gui
 import * as dat from 'dat.gui'
 
-console.log(dat)
+/****
+ * Debug
+ ****/
+const gui = new dat.GUI()
 
 /**
  * Base
