@@ -2,6 +2,10 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+// how to import dat.gui
+import * as dat from 'dat.gui'
+
+console.log(dat)
 
 /**
  * Base
