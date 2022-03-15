@@ -10,6 +10,16 @@ import * as dat from 'dat.gui'
  ****/
 const gui = new dat.GUI()
 
+// create color object
+const parameter = {
+    color: 0x3ac33a
+}
+// now change the color of material 
+gui.addColor(parameter, 'color').onChange( () => {
+    material.color.set(parameter.color)
+})
+
+
 /**
  * Base
  */
@@ -23,14 +33,19 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
+const material = new THREE.MeshBasicMaterial({ color: parameter.color})
 const mesh = new THREE.Mesh(geometry, material)
+// mesh.visible = false 
 scene.add(mesh)
 
 // CREATE  Debug  mimimum , maximum , presion
-gui.add(mesh.position, 'y', -3,3,0.01 ) 
-gui.add(mesh.position, 'x', -3,3,0.01 ) 
-gui.add(mesh.position, 'z', -3,3,0.01 ) 
+gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('elevation')
+// add visible true or false boolean value
+gui.add(mesh, 'visible')
+// add wireframe boolean value
+gui.add(material, 'wireframe') 
+// adding color 
+
 
 /**
  * Sizes
