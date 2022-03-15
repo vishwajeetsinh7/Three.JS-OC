@@ -8,16 +8,23 @@ import * as dat from 'dat.gui'
 /****
  * Debug
  ****/
-const gui = new dat.GUI()
+const gui = new dat.GUI({closed:true, width:400})
 
 // create color object
 const parameter = {
-    color: 0x3ac33a
+    color: 0x3ac33a,
+    spin: () => {
+        gsap.to(mesh.rotation,{duration:1, y:mesh.rotation.y + 10})
+
+    }
 }
 // now change the color of material 
 gui.addColor(parameter, 'color').onChange( () => {
     material.color.set(parameter.color)
 })
+// add gui
+gui.add(parameter, 'spin')
+// gui.hide()
 
 
 /**
@@ -44,7 +51,7 @@ gui.add(mesh.position, 'y').min(-3).max(3).step(0.01).name('elevation')
 gui.add(mesh, 'visible')
 // add wireframe boolean value
 gui.add(material, 'wireframe') 
-// adding color 
+// adding color  
 
 
 /**
