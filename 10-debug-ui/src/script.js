@@ -27,6 +27,11 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
+// CREATE  Debug  mimimum , maximum , presion
+gui.add(mesh.position, 'y', -3,3,0.01 ) 
+gui.add(mesh.position, 'x', -3,3,0.01 ) 
+gui.add(mesh.position, 'z', -3,3,0.01 ) 
+
 /**
  * Sizes
  */
