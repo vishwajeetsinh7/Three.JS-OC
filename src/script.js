@@ -6,20 +6,28 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import imageSource from '../static/textures/door/color.jpg'
 console.log(imageSource)
 
+// loading  MANAGER
+const loadingManager  = new THREE.LoadingManager()
 
-/**
- * TEXTURES SECTION
- */
-// CREATE AN image instance, listen to load event, and change its src. 
-
-const image = new Image()
-// declarte texture outside of function
-const texture = new THREE.Texture(image)
-
-image.onload = () => {
-    texture.needsUpdate = true
+loadingManager.onStart = () => {
+    console.log('onstart')
 }
-image.src = '/textures/door/color.jpg'
+
+loadingManager.onLoaded = () => {
+    console.log('onloaded')
+}
+
+loadingManager.onProgress = () => {
+    console.log('onprogress')
+}
+
+loadingManager.onError = () => {
+    console.log('onerror')
+}
+
+
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const texture = textureLoader.load('/textures/door/color.jpg')
 
 
 /**
